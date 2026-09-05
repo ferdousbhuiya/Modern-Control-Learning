@@ -3,125 +3,121 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f9fc">
+  <meta name="theme-color" content="#f5f7fb">
   <title>Modern Control Learning</title>
-  <meta name="description" content="A step-by-step Modern Control Systems learning platform from mathematics refresher through advanced state-space control, MATLAB, simulations, labs, and projects.">
+  <meta name="description" content="A zero-to-advanced Modern Control learning platform with curriculum, simulations, computational labs, theory, problem sets, MATLAB and projects.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260905-2">
+  <link rel="stylesheet" href="styles.css?v=20260905-4">
 </head>
-<body>
-  <header class="site-header stitch-header">
-    <a class="brand" href="#home" data-home>
-      <span class="brand-mark">MC</span>
-      <span><strong>Modern Control</strong><small>Learning Platform</small></span>
+<body class="stitch-page">
+  <header class="stitch-topbar">
+    <a class="stitch-brand" href="#home" data-home>
+      <span class="stitch-logo">∿</span>
+      <span><strong>Modern Control</strong><small>AUTONOMOUS SYSTEMS CORE</small></span>
     </a>
-    <nav class="top-nav" aria-label="Primary">
-      <a href="#home" data-home>Home</a>
-      <button class="nav-tab" type="button" data-platform="curriculum">Curriculum</button>
-      <button class="nav-tab" type="button" data-platform="simulations">Simulations</button>
-      <button class="nav-tab" type="button" data-platform="labs">Labs</button>
-      <button class="nav-tab" type="button" data-platform="theory">Theory Docs</button>
-      <button class="nav-tab" type="button" data-platform="problems">Problem Sets</button>
+    <nav class="stitch-nav">
+      <a class="active" href="#roadmap" data-scroll-roadmap>Curriculum</a>
+      <a href="#workspaces" data-platform="simulations">Simulations</a>
+      <a href="#workspaces" data-platform="labs">Computational Labs</a>
+      <a href="#workspaces" data-platform="theory">Theory Docs</a>
+      <a href="#workspaces" data-platform="problems">Problem Sets</a>
       <a href="#videos">Videos</a>
-      <button class="resume-btn" type="button" data-resume>Resume Learning</button>
     </nav>
+    <button class="stitch-resume" type="button" data-resume>Resume Learning</button>
     <button class="menu-btn" type="button" aria-label="Open menu" data-menu>☰</button>
   </header>
 
   <main id="app">
-    <section id="home" class="hero stitch-hero">
-      <div class="hero-copy">
-        <div class="eyebrow">BUILD YOUR KNOWLEDGE. SOLVE REAL PROBLEMS. GROW STEP BY STEP.</div>
-        <h1>Modern Control Systems</h1>
-        <h2>From forgotten basics to confident design.</h2>
-        <p>A complete self-study platform that rebuilds mathematics and classical control before moving carefully into state-space analysis, controllability, observability, state feedback, observers, Lyapunov stability, LQR, MATLAB/Simulink, digital control, and advanced projects.</p>
-        <div class="hero-actions">
-          <button class="primary" type="button" data-start>Start Learning →</button>
-          <button class="secondary" type="button" data-diagnostic>Take Prerequisite Check</button>
-          <button class="tertiary" type="button" data-scroll-roadmap>View Roadmap</button>
-        </div>
-      </div>
-
-      <div class="hero-dashboard">
-        <div class="dashboard-card real-world-control">
-          <div class="dashboard-title"><span>Real-World Control Example</span><strong>Cruise Control System</strong></div>
-          <div class="cruise-visual">
-            <div class="control-node ref-node">Desired Speed<br><b>r(t)</b></div>
-            <div class="control-node ctrl-node">Controller<br><b>C(s)</b></div>
-            <div class="control-node plant-node">Vehicle<br><b>G(s)</b></div>
-            <div class="control-node out-node">Actual Speed<br><b>y(t)</b></div>
-            <div class="control-node sensor-node">Sensor<br><b>H(s)</b></div>
-            <svg viewBox="0 0 720 280" aria-hidden="true">
-              <defs><marker id="stitchArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z"/></marker></defs>
-              <path d="M125 105H210M320 105H390M500 105H585" class="st-flow"/>
-              <path d="M635 120V225H465M355 225H265V135" class="st-feedback"/>
-            </svg>
-          </div>
-          <div class="dashboard-caption">Keep your speed steady automatically, even when road conditions change.</div>
-        </div>
-        <aside class="confidence-card">
-          <span class="eyebrow">LEARN WITH CONFIDENCE</span>
-          <ul>
-            <li>Step-by-step explanations</li>
-            <li>Real-world engineering examples</li>
-            <li>Diagrams and visualizations</li>
-            <li>MATLAB / Simulink practice</li>
-            <li>Debugging and common mistakes</li>
-            <li>Quizzes and progress tracking</li>
-          </ul>
-        </aside>
-      </div>
+    <section id="home" class="stitch-status">
+      <span><i></i> Kernel: Ready</span>
+      <span>RK4 / State-Space Solver</span>
+      <span>SimEngine: Connected</span>
+      <button type="button" data-diagnostic>Prerequisite Check</button>
     </section>
 
-    <section class="quick-strip">
-      <button data-scroll-roadmap><span class="quick-icon">13</span><div><strong>Structured Stages</strong><small>From refresher to advanced topics</small></div><b>→</b></button>
-      <button data-platform="simulations"><span class="quick-icon">∿</span><div><strong>Interactive Simulations</strong><small>See dynamics before memorizing equations</small></div><b>→</b></button>
-      <button data-platform="labs"><span class="quick-icon">M</span><div><strong>MATLAB Integration</strong><small>Code, simulations, plots, and labs</small></div><b>→</b></button>
-      <button data-resume><span class="quick-icon">✓</span><div><strong>Track Your Progress</strong><small>Resume from your last lesson</small></div><b>→</b></button>
+    <section class="stitch-tabs">
+      <a class="active" href="#roadmap" data-scroll-roadmap>▣ Curriculum (00 to 12)</a>
+      <a href="#workspaces" data-platform="simulations">⌁ Interactive Simulation Lab</a>
+      <a href="#workspaces" data-platform="labs">⌘ Computational Labs</a>
+      <a href="#workspaces" data-platform="theory">Σ Theory & Proof Docs</a>
+      <a href="#workspaces" data-platform="problems">☑ Benchmarks & Exams</a>
     </section>
 
-    <section id="roadmap" class="roadmap-section stitch-roadmap">
-      <div class="section-head">
-        <div><span class="eyebrow">YOUR 13-STAGE LEARNING PATH</span><h2>Learn in sequence, without hidden gaps.</h2><p>Open any stage to see its lessons, practical work, MATLAB tasks, and checkpoints.</p></div>
+    <section class="stitch-landing">
+      <div class="stitch-landing-copy">
+        <div class="stitch-kickers"><span>ZERO-TO-ADVANCED LADDER</span><span>Stages 00 → 12</span></div>
+        <h1>Modern Control & Autonomous Systems Mastery</h1>
+        <p>A rigorous but beginner-friendly engineering roadmap that rebuilds forgotten mathematics and classical control before moving into state-space analysis, controllability, observability, state feedback, observers, Lyapunov stability, LQR, digital control, Kalman filtering, and advanced projects.</p>
+        <div class="stitch-metrics">
+          <span>◇ <b>13 Structured Stages</b></span>
+          <span>⚗ <b id="lessonCount">60+ Lessons</b></span>
+          <span>▤ <b>Practice + MATLAB</b></span>
+          <span>◉ <b>Progress Tracking</b></span>
+        </div>
+      </div>
+      <aside class="stitch-syllabus">
+        <div><small>INTERACTIVE SYLLABUS</small><b>Zero to Advanced</b></div>
+        <p><span>Foundation:</span><strong>Stages 00–03</strong></p>
+        <p><span>Modern Control:</span><strong>Stages 04–10</strong></p>
+        <p><span>Labs & Advanced:</span><strong>Stages 11–12</strong></p>
+        <button type="button" data-platform="simulations">Launch Simulation Sandbox →</button>
+      </aside>
+    </section>
+
+    <section id="roadmap" class="stitch-roadmap-wrap">
+      <div class="stitch-roadmap-head">
+        <div><small>INTERACTIVE SYLLABUS</small><h2>Your 13-Stage Learning Path</h2><p>Follow the sequence from foundation to expert, or open a stage directly when reviewing.</p></div>
         <div class="progress-summary"><small>Your progress</small><strong id="overallProgress">0%</strong><div><i id="overallBar"></i></div></div>
       </div>
-      <div id="stageGrid" class="stage-grid"></div>
+      <div id="stageGrid" class="stage-grid stitch-stage-grid"></div>
     </section>
 
-    <section class="platform-section">
-      <div class="section-head">
-        <div><span class="eyebrow">ONE COURSE, MULTIPLE WAYS TO LEARN</span><h2>Use the right workspace for the problem.</h2></div>
+    <section id="workspaces" class="stitch-workspaces">
+      <div class="stitch-roadmap-head">
+        <div><small>ENGINEERING WORKBENCH</small><h2>Learn the same topic from several directions.</h2><p>Use curriculum, simulations, computational labs, theory references, and problem sets together.</p></div>
       </div>
       <div class="platform-grid">
-        <article><span class="platform-icon">≡</span><div><h3>Curriculum Hub</h3><p>Browse all 13 stages, see prerequisites, and continue sequentially.</p><button data-platform="curriculum">Open Curriculum →</button></div></article>
-        <article><span class="platform-icon">∿</span><div><h3>Simulation Lab</h3><p>Explore poles, second-order response, state trajectories, and feedback behavior visually.</p><button data-platform="simulations">Open Simulations →</button></div></article>
-        <article><span class="platform-icon">{ }</span><div><h3>Computational Labs</h3><p>MATLAB-focused labs for modeling, state space, feedback, observers, and LQR.</p><button data-platform="labs">Open Labs →</button></div></article>
-        <article><span class="platform-icon">π</span><div><h3>Theory & Math Docs</h3><p>Compact reference pages for matrices, transforms, state-space theory, Lyapunov methods, and more.</p><button data-platform="theory">Open Theory Docs →</button></div></article>
-        <article><span class="platform-icon">✓</span><div><h3>Problem Sets</h3><p>Course-style practice, debugging tasks, benchmarks, and exam preparation.</p><button data-platform="problems">Open Problem Sets →</button></div></article>
-        <article><span class="platform-icon">∞</span><div><h3>Advanced Projects</h3><p>Build toward robotics, digital control, Kalman filtering, robustness, and MPC.</p><button data-stage-direct="12">Open Advanced Stage →</button></div></article>
+        <article><span class="platform-icon">∿</span><div><h3>Interactive Simulation Lab</h3><p>Visualize poles, damping, feedback, state trajectories, controllability, and LQR tradeoffs.</p><button type="button" data-platform="simulations">Open Simulations →</button></div></article>
+        <article><span class="platform-icon">{ }</span><div><h3>Computational Labs</h3><p>MATLAB-focused modeling, state-space, observer, pole-placement, LQR, and digital-control labs.</p><button type="button" data-platform="labs">Open Labs →</button></div></article>
+        <article><span class="platform-icon">Σ</span><div><h3>Theory & Proof Docs</h3><p>Compact mathematical reference for linear algebra, state-space theory, Lyapunov stability, and optimal control.</p><button type="button" data-platform="theory">Open Theory Docs →</button></div></article>
+        <article><span class="platform-icon">✓</span><div><h3>Benchmarks & Problem Sets</h3><p>Course-style questions, debugging practice, exam preparation, and stage-linked problem sets.</p><button type="button" data-platform="problems">Open Problem Sets →</button></div></article>
       </div>
     </section>
 
-    <section class="how-section">
-      <div class="section-head"><div><span class="eyebrow">EVERY LESSON USES THE SAME PATTERN</span><h2>No jumping from definition to homework.</h2></div></div>
-      <div class="lesson-pattern">
-        <span>Intuition</span><b>→</b><span>Theory</span><b>→</b><span>Mathematics</span><b>→</b><span>Visual</span><b>→</b><span>Worked Example</span><b>→</b><span>Practice</span><b>→</b><span>Debugging</span><b>→</b><span>Real World</span><b>→</b><span>Q&amp;A</span><b>→</b><span>MATLAB</span><b>→</b><span>Quiz</span>
+    <section id="videos" class="stitch-videos">
+      <div class="stitch-roadmap-head">
+        <div><small>VISUAL LEARNING</small><h2>Official video resources</h2><p>These links are direct links and work even if the interactive JavaScript is unavailable.</p></div>
+      </div>
+      <div id="videoGrid" class="video-grid">
+        <article class="video-card">
+          <div class="video-thumb"></div>
+          <h3>MathWorks Control Systems Video Series</h3>
+          <p>Feedback, PID, Bode plots, state-space, Kalman filtering, MPC, and more.</p>
+          <a class="video-open" href="https://www.mathworks.com/videos/tech-talks/controls.html" target="_blank" rel="noopener noreferrer">Watch on MathWorks ↗</a>
+        </article>
+        <article class="video-card">
+          <div class="video-thumb"></div>
+          <h3>MathWorks State Space Video Series</h3>
+          <p>State-space intuition, pole placement, controllability, observability, and LQR.</p>
+          <a class="video-open" href="https://www.mathworks.com/videos/series/state-space.html" target="_blank" rel="noopener noreferrer">Watch on MathWorks ↗</a>
+        </article>
+        <article class="video-card">
+          <div class="video-thumb"></div>
+          <h3>State-Space Models in MATLAB</h3>
+          <p>Short practical videos on creating, analyzing, and controlling state-space models.</p>
+          <a class="video-open" href="https://www.mathworks.com/videos/series/state-space-models-100817.html" target="_blank" rel="noopener noreferrer">Watch on MathWorks ↗</a>
+        </article>
       </div>
     </section>
 
-    <section id="videos" class="videos-section">
-      <div class="section-head">
-        <div><span class="eyebrow">VISUAL LEARNING</span><h2>Use video when motion explains the idea better.</h2><p>Curated external resources support the lessons, but the written course remains complete without them.</p></div>
-      </div>
-      <div id="videoGrid" class="video-grid"></div>
-    </section>
-
-    <section class="source-note">
-      <strong>Course architecture</strong>
-      <p>This platform combines the structured 13-stage learning path with a professional engineering workbench: curriculum, simulations, computational labs, theory documentation, problem sets, and advanced projects. The main course remains beginner-friendly and sequential.</p>
-    </section>
+    <footer class="stitch-footer">
+      <span>Modern Control Learning Initiative</span>
+      <span><i></i> SYSTEM NOMINAL</span>
+      <a href="#roadmap" data-scroll-roadmap>Curriculum</a>
+      <a href="#videos">Video Resources</a>
+    </footer>
   </main>
 
   <div id="stageView" class="overlay" hidden></div>
@@ -130,7 +126,7 @@
   <div id="platformView" class="overlay" hidden></div>
   <div id="toast" class="toast" hidden></div>
 
-  <script src="content.js?v=20260905-2"></script>
-  <script src="app.js?v=20260905-2"></script>
+  <script src="content.js?v=20260905-4"></script>
+  <script src="app.js?v=20260905-4"></script>
 </body>
 </html>
