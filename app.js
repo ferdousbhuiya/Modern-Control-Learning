@@ -4,7 +4,7 @@
   let state={completed:{},last:{stage:0,lesson:0}};
   try{state={...state,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(_){}
   const save=()=>localStorage.setItem(KEY,JSON.stringify(state));
-  const stageView=$('#stageView'),lessonView=$('#lessonView'),diagView=$('#diagnosticView'),toast=$('#toast');
+  const stageView=$('#stageView'),lessonView=$('#lessonView'),diagView=$('#diagnosticView'),platformView=$('#platformView'),toast=$('#toast');
 
   const totalLessons=()=>MC.stages.reduce((n,s)=>n+s.lessons.length,0);
   const doneCount=()=>Object.values(state.completed||{}).filter(Boolean).length;
@@ -37,7 +37,7 @@
   }
 
   function closeOverlay(el){el.hidden=true;document.body.style.overflow=''}
-  function closeAll(){[stageView,lessonView,diagView].forEach(x=>x.hidden=true);document.body.style.overflow=''}
+  function closeAll(){[stageView,lessonView,diagView,platformView].forEach(x=>x.hidden=true);document.body.style.overflow=''}
   function openOverlay(el){closeAll();el.hidden=false;document.body.style.overflow='hidden';el.scrollTop=0}
 
   function header(title,sub){
@@ -143,6 +143,86 @@
     openOverlay(lessonView);
   }
 
+  function openPlatform(kind='curriculum'){
+    const views={
+      curriculum:{
+        title:'Curriculum Learning Hub',sub:'13-stage structured course',
+        desc:'Browse the complete learning path from mathematics refresher through advanced projects. The curriculum remains sequential so prerequisites are not skipped.'
+      },
+      simulations:{
+        title:'Interactive Simulation Lab',sub:'Visualize dynamics before memorizing formulas',
+        desc:'Use conceptual visualizations to connect poles, damping, feedback, state trajectories, and control design to system behavior.'
+      },
+      labs:{
+        title:'Computational Labs',sub:'MATLAB and Simulink workbench',
+        desc:'Practice modeling, simulation, controllability, observers, pole placement, LQR, and verification using MATLAB-oriented lab workflows.'
+      },
+      theory:{
+        title:'Theory & Mathematics Documentation',sub:'Compact engineering reference',
+        desc:'Review the equations, definitions, and mathematical tools used throughout the course without leaving the learning platform.'
+      },
+      problems:{
+        title:'Benchmarks & Problem Sets',sub:'Practice, debugging, and exam preparation',
+        desc:'Work through course-style problems, common mistakes, and applied engineering tasks matched to the 13-stage curriculum.'
+      }
+    };
+    const v=views[kind]||views.curriculum;
+    const sidebar=Object.entries(views).map(([k,x])=>`<button class="${k===kind?'active':''}" data-workspace="${k}">${x.title.replace(' Learning Hub','').replace('Interactive ','').replace(' Documentation','')}</button>`).join('');
+    let body='';
+    if(kind==='curriculum'){
+      body=`<div class="workspace-grid">${MC.stages.map(s=>`<article class="workspace-card"><div class="meta">STAGE ${String(s.id).padStart(2,'0')} · ${s.level.toUpperCase()}</div><h3>${s.title}</h3><p>${s.description}</p><button data-open-stage="${s.id}">${stageDone(s)?'Continue Stage':'Open Stage'} →</button></article>`).join('')}</div>`;
+    } else if(kind==='simulations'){
+      const sims=[
+        ['s-Plane Pole Explorer','Move conceptual poles and connect location to stability, damping, and oscillation.','Stage 0 & 3'],
+        ['Second-Order Response','Compare damping ratio, natural frequency, overshoot, and settling behavior.','Stage 3'],
+        ['Feedback Loop Behavior','See how negative feedback changes command tracking and disturbance rejection.','Stage 1 & 3'],
+        ['State Trajectory View','Connect A-matrix eigenvalues to natural state motion and modal response.','Stage 4 & 5'],
+        ['Controllability / Observability','Visualize actuator authority and sensor visibility across state directions.','Stage 6'],
+        ['LQR Tradeoff Explorer','Compare state error penalties with control-effort penalties.','Stage 10']
+      ];
+      body=`<div class="workspace-grid">${sims.map((x,i)=>`<article class="workspace-card sim"><div class="sim-canvas"><svg viewBox="0 0 500 170"><path d="M25 120 C100 ${i%2?55:95},180 40,245 85 S380 125,475 55" fill="none" stroke="${i%2?'#5ec8ff':'#54e5a7'}" stroke-width="3"/><line x1="20" y1="135" x2="480" y2="135" stroke="#385569"/><line x1="250" y1="18" x2="250" y2="150" stroke="#385569"/></svg></div><div class="meta">${x[2]}</div><h3>${x[0]}</h3><p>${x[1]}</p><button data-sim-stage="${[0,3,1,5,6,10][i]}">Open related lesson →</button></article>`).join('')}</div>`;
+    } else if(kind==='labs'){
+      const labs=[
+        ['Modeling Lab','Build mass-spring-damper, RLC, and DC motor models and verify transfer functions.','2'],
+        ['State-Space Conversion Lab','Convert between transfer functions and A/B/C/D models and verify equivalent response.','4'],
+        ['Controllability & Observability Lab','Use ctrb, obsv, rank, and PBH reasoning on several actuator/sensor choices.','6'],
+        ['State Feedback & Observer Lab','Design K and L, inspect closed-loop and estimation-error poles, and simulate responses.','7'],
+        ['LQR Lab','Tune Q and R, compare performance with pole placement, and inspect control effort.','10'],
+        ['Digital Control Lab','Discretize continuous models, inspect z-plane poles, and study sample-time effects.','12']
+      ];
+      body=`<div class="workspace-grid">${labs.map(x=>`<article class="workspace-card lab"><div class="meta">MATLAB LAB · STAGE ${x[2]}</div><h3>${x[0]}</h3><p>${x[1]}</p><button data-open-stage="${x[2]}">Launch Lab Path →</button></article>`).join('')}</div>`;
+    } else if(kind==='theory'){
+      const docs=[
+        ['Linear Algebra for Control','Matrices, determinants, rank, eigenvalues, eigenvectors, similarity, and Jordan structure.',0],
+        ['Laplace & Transfer Functions','Transforms, poles, zeros, partial fractions, block diagrams, and input-output models.',0],
+        ['State-Space Reference','States, realizations, state transition matrix, matrix exponential, and model conversion.',4],
+        ['Controllability & Observability','Rank tests, PBH tests, decomposition, sensor and actuator interpretation.',6],
+        ['Lyapunov Stability','Positive definiteness, quadratic functions, continuous/discrete Lyapunov equations.',9],
+        ['Optimal Control','Quadratic cost, Riccati equation, LQR, LQI, and control-effort tradeoffs.',10]
+      ];
+      body=`<div class="workspace-grid">${docs.map(x=>`<article class="workspace-card theory"><div class="meta">THEORY REFERENCE · STAGE ${x[2]}</div><h3>${x[0]}</h3><p>${x[1]}</p><button data-open-stage="${x[2]}">Open reference lessons →</button></article>`).join('')}</div>`;
+    } else {
+      const rows=[
+        ['P01','Polynomial roots & pole interpretation','Foundation','0'],
+        ['P02','Mass-spring-damper derivation','Modeling','2'],
+        ['P03','Steady-state error constants','Classical Control','3'],
+        ['P04','State-space conversion and eigenvalues','State Space','4'],
+        ['P05','Controllability / observability rank tests','Modern Control','6'],
+        ['P06','Pole placement & observer design','Synthesis','7'],
+        ['P07','Lyapunov equation proof/check','Stability','9'],
+        ['P08','LQR tuning and Riccati interpretation','Optimal Control','10'],
+        ['P09','Digital pole mapping','Advanced','12']
+      ];
+      body=`<div class="problem-list">${rows.map(x=>`<div class="problem-row"><span>${x[0]}</span><div><strong>${x[1]}</strong><small>${x[2]}</small></div><b>Stage ${x[3]}</b></div>`).join('')}</div><div class="workspace-card problem" style="margin-top:10px"><h3>How to use the problem sets</h3><p>Attempt the problem first, then return to the related stage for the worked example, debugging section, MATLAB verification, and quiz. This keeps practice tied to understanding rather than memorization.</p></div>`;
+    }
+    platformView.innerHTML=header(v.title,v.sub)+`<div class="platform-shell"><aside class="platform-sidebar"><span class="eyebrow">ENGINEERING WORKBENCH</span><h3>Learning Spaces</h3>${sidebar}</aside><main class="platform-main"><section class="platform-hero"><span class="eyebrow">${v.sub.toUpperCase()}</span><h1>${v.title}</h1><p>${v.desc}</p></section>${body}</main></div>`;
+    bindHead(platformView,()=>closeOverlay(platformView));
+    $('[data-workspace]',platformView).forEach(b=>b.onclick=()=>openPlatform(b.dataset.workspace));
+    $('[data-open-stage]',platformView).forEach(b=>b.onclick=()=>openStage(Number(b.dataset.openStage)));
+    $('[data-sim-stage]',platformView).forEach(b=>b.onclick=()=>openStage(Number(b.dataset.simStage)));
+    openOverlay(platformView);
+  }
+
   function diagnostic(){
     const qs=[
       ['Can you factor s²+5s+6?',0],['Do you remember how to multiply two matrices?',0],['Can you explain what an eigenvalue means?',0],
@@ -167,8 +247,13 @@
   }
 
   function resume(){openLesson(state.last?.stage??0,state.last?.lesson??0)}
-  $$('[data-home]').forEach(a=>a.onclick=e=>{e.preventDefault();closeAll();$('#home')?.scrollIntoView({behavior:'smooth'})});
-  $('[data-start]').onclick=()=>openStage(0);$('[data-diagnostic]').onclick=diagnostic;$('[data-resume]').onclick=resume;
+  $('[data-home]').forEach(a=>a.onclick=e=>{e.preventDefault();closeAll();$('#home')?.scrollIntoView({behavior:'smooth'})});
+  $('[data-start]').onclick=()=>openStage(0);
+  $('[data-diagnostic]').onclick=diagnostic;
+  $('[data-resume]').forEach(b=>b.onclick=resume);
+  $('[data-platform]').forEach(b=>b.onclick=()=>openPlatform(b.dataset.platform));
+  $('[data-stage-direct]').forEach(b=>b.onclick=()=>openStage(Number(b.dataset.stageDirect)));
+  $('[data-scroll-roadmap]').forEach(b=>b.onclick=()=>$('#roadmap')?.scrollIntoView({behavior:'smooth',block:'start'}));
   $('[data-menu]').onclick=()=>$('.top-nav').classList.toggle('open');
   updateHome();
 })();
