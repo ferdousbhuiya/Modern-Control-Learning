@@ -112,3 +112,26 @@ body{background:#f7f9fc;color:var(--text);font-size:14px}
 .qa details{background:#f7fafc;border-color:#d8e4ed}.qa summary{font-size:9px}.quiz-box button{background:#f7fafc;border-color:#d8e4ed;color:#36546d;font-size:9px}.quiz-feedback{font-size:8px;color:#718599}
 .diagnostic-card>p,.diag-q strong{font-size:10px}.diag-q label{font-size:9px;color:#4f687e}
 @media(max-width:760px){.hero h1{font-size:34px}.hero{padding-top:32px}.control-scene{min-height:410px}}
+
+/* Contrast and video-card usability pass */
+.stage-card{border-width:1.5px;color:#0f2d4f}
+.stage-card:nth-child(6n+1){background:#e5f1ff;border-color:#b7d3f1}
+.stage-card:nth-child(6n+2){background:#e7f7ed;border-color:#b8dec6}
+.stage-card:nth-child(6n+3){background:#fff4cf;border-color:#ead797}
+.stage-card:nth-child(6n+4){background:#ffe8ef;border-color:#eebac8}
+.stage-card:nth-child(6n+5){background:#ede7ff;border-color:#cfc1f0}
+.stage-card:nth-child(6n+6){background:#e1f6f8;border-color:#b6dde0}
+.stage-card .stage-no{color:#0a5fae;font-weight:900}
+.stage-card h3{color:#0d2b4b;font-weight:800}
+.stage-card p{color:#35536d;font-weight:500;line-height:1.5}
+.stage-card footer{color:#36536d;font-weight:600}.stage-card footer b{color:#0d2b4b}
+.learning-modes article{border-width:1.5px}.learning-modes strong{color:#102f52}.learning-modes p{color:#435f79}
+.video-card{position:relative;border-width:1.5px;border-color:#b9d7d2;background:#ffffff;color:#153553;transition:.18s ease;cursor:pointer}
+.video-card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(35,78,112,.12);border-color:#75b9ad}
+.video-card h3{color:#0e3153;font-weight:800}.video-card p{color:#3f6079;line-height:1.5}
+.video-thumb{border:1px solid #c4dfe8;background:linear-gradient(135deg,#dcefff,#daf6ea)}
+.video-card .video-open{display:inline-flex;align-items:center;gap:6px;margin-top:10px;border:1px solid #83cbb8;background:#e9fbf5;color:#067553;border-radius:8px;padding:8px 10px;font-size:9px;font-weight:850}
+.video-card .video-open:hover{background:#d9f6ec}
+.video-card:focus-visible{outline:3px solid rgba(21,117,209,.25);outline-offset:3px}
+.lesson-pattern span{color:#233f60;font-weight:700}
+.source-note p{color:#49657d}
