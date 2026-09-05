@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07131f">
+  <title>Modern Control Learning</title>
+  <meta name="description" content="Learn Modern Control Systems step by step, from mathematics refresher and classical control to state space, controllability, observers, Lyapunov stability, LQR, MATLAB, Simulink, and advanced projects.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" data-home>
+      <span class="brand-mark">MC</span>
+      <span><strong>Modern Control</strong><small>Learning Lab</small></span>
+    </a>
+    <nav class="top-nav" aria-label="Primary">
+      <a href="#home" data-home>Home</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#videos">Videos</a>
+      <button type="button" data-resume>Resume Learning</button>
+    </nav>
+    <button class="menu-btn" type="button" aria-label="Open menu" data-menu>☰</button>
+  </header>
+
+  <main id="app">
+    <section id="home" class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">BEGIN AGAIN. UNDERSTAND IT THIS TIME.</div>
+        <h1>Modern Control,<br><span>from forgotten basics to confident design.</span></h1>
+        <p>You do not need to remember what you learned years ago. Start from the mathematics you actually need, rebuild classical control intuition, then move carefully into state-space analysis, controllability, observers, Lyapunov stability, LQR, MATLAB, Simulink, and advanced design.</p>
+        <div class="hero-actions">
+          <button class="primary" type="button" data-start>Start from the Beginning →</button>
+          <button class="secondary" type="button" data-diagnostic>Take Prerequisite Check</button>
+        </div>
+        <div class="hero-trust">
+          <span>13 stages</span><span id="lessonCount">70+ lessons</span><span>Practice in every lesson</span><span>MATLAB throughout</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Feedback control illustration">
+        <div class="control-scene">
+          <div class="signal reference">Desired<br><b>r(t)</b></div>
+          <div class="sum">Σ</div>
+          <div class="block controller">Controller<br><b>K / C(s)</b></div>
+          <div class="block plant">Physical Plant<br><b>G(s)</b></div>
+          <div class="signal output">Output<br><b>y(t)</b></div>
+          <div class="sensor">Sensor<br><b>H(s)</b></div>
+          <svg viewBox="0 0 700 320" aria-hidden="true">
+            <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z"/></marker></defs>
+            <path d="M95 112H158" class="flow"/>
+            <path d="M205 112H292" class="flow"/>
+            <path d="M402 112H488" class="flow"/>
+            <path d="M595 112H665" class="flow"/>
+            <path d="M630 112V250H365" class="feedback-line"/>
+            <path d="M300 250H183V142" class="feedback-line"/>
+          </svg>
+          <div class="real-card"><strong>Real-world comparison</strong><span>Cruise control: desired speed → controller → engine/vehicle → measured speed → feedback.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learning-modes">
+      <article><span>01</span><div><strong>Refresh</strong><p>I learned this before, but I need the ideas rebuilt slowly.</p></div></article>
+      <article><span>02</span><div><strong>Learn</strong><p>Teach me from first principles with equations, pictures, and worked examples.</p></div></article>
+      <article><span>03</span><div><strong>Master</strong><p>Give me course-level problems, MATLAB verification, and advanced design.</p></div></article>
+    </section>
+
+    <section id="roadmap" class="roadmap-section">
+      <div class="section-head">
+        <div><span class="eyebrow">13-STAGE ROADMAP</span><h2>One continuous path from foundation to expert.</h2></div>
+        <div class="progress-summary"><small>Your progress</small><strong id="overallProgress">0%</strong><div><i id="overallBar"></i></div></div>
+      </div>
+      <div id="stageGrid" class="stage-grid"></div>
+    </section>
+
+    <section class="how-section">
+      <div class="section-head"><div><span class="eyebrow">EVERY LESSON USES THE SAME PATTERN</span><h2>No jumping from definition to homework.</h2></div></div>
+      <div class="lesson-pattern">
+        <span>Intuition</span><b>→</b><span>Theory</span><b>→</b><span>Mathematics</span><b>→</b><span>Visual</span><b>→</b><span>Worked Example</span><b>→</b><span>Practice</span><b>→</b><span>Debugging</span><b>→</b><span>Real World</span><b>→</b><span>Q&amp;A</span><b>→</b><span>MATLAB</span><b>→</b><span>Quiz</span>
+      </div>
+    </section>
+
+    <section id="videos" class="videos-section">
+      <div class="section-head">
+        <div><span class="eyebrow">VISUAL LEARNING</span><h2>Use video when a moving explanation helps.</h2><p>Curated external resources supplement the written lessons. The course itself remains usable without them.</p></div>
+      </div>
+      <div id="videoGrid" class="video-grid"></div>
+    </section>
+
+    <section class="source-note">
+      <strong>Course alignment</strong>
+      <p>The roadmap is aligned with the current Modern Control topics you supplied: mathematical system descriptions, linear algebra and matrix theory, state-space solutions, controllability, observability, state feedback, state estimation, stability, LQR, digital control, and MATLAB/Simulink. Additional prerequisite explanations and examples are included so a returning learner can start much earlier.</p>
+    </section>
+  </main>
+
+  <div id="stageView" class="overlay" hidden></div>
+  <div id="lessonView" class="overlay" hidden></div>
+  <div id="diagnosticView" class="overlay" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
