@@ -28,7 +28,12 @@
         <footer><span><b>${s.lessons.length}</b> lessons</span><span>${d ? d+' completed' : 'Start here'} →</span></footer>
       </button>`}).join('');
     $$('.stage-card').forEach(b=>b.onclick=()=>openStage(Number(b.dataset.stage)));
-    $('#videoGrid').innerHTML=MC.courseVideos.map(v=>`<article class="video-card"><div class="video-thumb"></div><h3>${v.title}</h3><p>${v.desc}</p><a href="${v.url}" target="_blank" rel="noopener">Open video resource ↗</a></article>`).join('');
+    $('#videoGrid').innerHTML=MC.courseVideos.map((v,i)=>`<article class="video-card" tabindex="0" role="link" data-video-index="${i}" aria-label="Open ${v.title}"><div class="video-thumb"></div><h3>${v.title}</h3><p>${v.desc}</p><a class="video-open" href="${v.url}" target="_blank" rel="noopener noreferrer">Watch on MathWorks ↗</a></article>`).join('');
+    $('.video-card').forEach(card=>{
+      const open=()=>{const v=MC.courseVideos[Number(card.dataset.videoIndex)];if(v?.url)window.open(v.url,'_blank','noopener,noreferrer')};
+      card.addEventListener('click',e=>{if(e.target.closest('a'))return;open()});
+      card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+    });
   }
 
   function closeOverlay(el){el.hidden=true;document.body.style.overflow=''}
