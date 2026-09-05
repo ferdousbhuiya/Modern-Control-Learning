@@ -254,7 +254,7 @@
   $$('[data-platform]').forEach(b=>b.addEventListener('click',()=>openPlatform(b.dataset.platform)));
   $$('[data-stage-direct]').forEach(b=>b.addEventListener('click',()=>openStage(Number(b.dataset.stageDirect))));
   $$('[data-scroll-roadmap]').forEach(b=>b.addEventListener('click',()=>$('#roadmap')?.scrollIntoView({behavior:'smooth',block:'start'})));
-  $('[data-menu]')?.addEventListener('click',()=>$('.top-nav')?.classList.toggle('open'));
+  $('[data-menu]')?.addEventListener('click',()=>($('.stitch-nav')||$('.top-nav'))?.classList.toggle('open'));
 
   document.addEventListener('click',e=>{
     const platform=e.target.closest?.('[data-platform]');
