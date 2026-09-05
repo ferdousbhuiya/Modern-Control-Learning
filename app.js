@@ -15,10 +15,10 @@
   const showToast=msg=>{toast.textContent=msg;toast.hidden=false;clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.hidden=true,2200)};
 
   function updateHome(){
-    $('#lessonCount').textContent=totalLessons()+' lessons';
+    const lessonCountEl=$('#lessonCount'); if(lessonCountEl) lessonCountEl.textContent=totalLessons()+' lessons';
     const p=pct(doneCount(),totalLessons());
-    $('#overallProgress').textContent=p+'%';$('#overallBar').style.width=p+'%';
-    $('#stageGrid').innerHTML=MC.stages.map(s=>{
+    const overallProgressEl=$('#overallProgress'), overallBarEl=$('#overallBar'); if(overallProgressEl) overallProgressEl.textContent=p+'%'; if(overallBarEl) overallBarEl.style.width=p+'%';
+    const stageGridEl=$('#stageGrid'); if(stageGridEl) stageGridEl.innerHTML=MC.stages.map(s=>{
       const d=stageDone(s),sp=pct(d,s.lessons.length);
       return `<button class="stage-card" data-stage="${s.id}">
         <span class="stage-no">STAGE ${String(s.id).padStart(2,'0')} · ${s.level.toUpperCase()}</span>
@@ -27,8 +27,8 @@
         <div class="mini-progress"><i style="width:${sp}%"></i></div>
         <footer><span><b>${s.lessons.length}</b> lessons</span><span>${d ? d+' completed' : 'Start here'} →</span></footer>
       </button>`}).join('');
-    $$('.stage-card').forEach(b=>b.onclick=()=>openStage(Number(b.dataset.stage)));
-    $('#videoGrid').innerHTML=MC.courseVideos.map((v,i)=>`<article class="video-card" tabindex="0" role="link" data-video-index="${i}" aria-label="Open ${v.title}"><div class="video-thumb"></div><h3>${v.title}</h3><p>${v.desc}</p><a class="video-open" href="${v.url}" target="_blank" rel="noopener noreferrer">Watch on MathWorks ↗</a></article>`).join('');
+    $('.stage-card').forEach(b=>b.onclick=()=>openStage(Number(b.dataset.stage)));
+    const videoGridEl=$('#videoGrid'); if(videoGridEl) videoGridEl.innerHTML=MC.courseVideos.map((v,i)=>`<article class="video-card" tabindex="0" role="link" data-video-index="${i}" aria-label="Open ${v.title}"><div class="video-thumb"></div><h3>${v.title}</h3><p>${v.desc}</p><a class="video-open" href="${v.url}" target="_blank" rel="noopener noreferrer">Watch on MathWorks ↗</a></article>`).join('');
     $('.video-card').forEach(card=>{
       const open=()=>{const v=MC.courseVideos[Number(card.dataset.videoIndex)];if(v?.url)window.open(v.url,'_blank','noopener,noreferrer')};
       card.addEventListener('click',e=>{if(e.target.closest('a'))return;open()});
@@ -247,13 +247,29 @@
   }
 
   function resume(){openLesson(state.last?.stage??0,state.last?.lesson??0)}
-  $('[data-home]').forEach(a=>a.onclick=e=>{e.preventDefault();closeAll();$('#home')?.scrollIntoView({behavior:'smooth'})});
-  $('[data-start]').onclick=()=>openStage(0);
-  $('[data-diagnostic]').onclick=diagnostic;
-  $('[data-resume]').forEach(b=>b.onclick=resume);
-  $('[data-platform]').forEach(b=>b.onclick=()=>openPlatform(b.dataset.platform));
-  $('[data-stage-direct]').forEach(b=>b.onclick=()=>openStage(Number(b.dataset.stageDirect)));
-  $('[data-scroll-roadmap]').forEach(b=>b.onclick=()=>$('#roadmap')?.scrollIntoView({behavior:'smooth',block:'start'}));
-  $('[data-menu]').onclick=()=>$('.top-nav').classList.toggle('open');
+  $$('[data-home]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();closeAll();$('#home')?.scrollIntoView({behavior:'smooth',block:'start'})}));
+  $('[data-start]')?.addEventListener('click',()=>openStage(0));
+  $('[data-diagnostic]')?.addEventListener('click',diagnostic);
+  $$('[data-resume]').forEach(b=>b.addEventListener('click',resume));
+  $$('[data-platform]').forEach(b=>b.addEventListener('click',()=>openPlatform(b.dataset.platform)));
+  $$('[data-stage-direct]').forEach(b=>b.addEventListener('click',()=>openStage(Number(b.dataset.stageDirect))));
+  $$('[data-scroll-roadmap]').forEach(b=>b.addEventListener('click',()=>$('#roadmap')?.scrollIntoView({behavior:'smooth',block:'start'})));
+  $('[data-menu]')?.addEventListener('click',()=>$('.top-nav')?.classList.toggle('open'));
+
+  document.addEventListener('click',e=>{
+    const platform=e.target.closest?.('[data-platform]');
+    if(platform){e.preventDefault();openPlatform(platform.dataset.platform);return}
+    const resumeBtn=e.target.closest?.('[data-resume]');
+    if(resumeBtn){e.preventDefault();resume();return}
+    const startBtn=e.target.closest?.('[data-start]');
+    if(startBtn){e.preventDefault();openStage(0);return}
+    const diag=e.target.closest?.('[data-diagnostic]');
+    if(diag){e.preventDefault();diagnostic();return}
+    const roadmap=e.target.closest?.('[data-scroll-roadmap]');
+    if(roadmap){e.preventDefault();$('#roadmap')?.scrollIntoView({behavior:'smooth',block:'start'});return}
+    const direct=e.target.closest?.('[data-stage-direct]');
+    if(direct){e.preventDefault();openStage(Number(direct.dataset.stageDirect));return}
+  });
+
   updateHome();
 })();
