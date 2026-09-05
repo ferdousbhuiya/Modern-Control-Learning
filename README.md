@@ -31,3 +31,8 @@ The project is structured around the current Modern Control course topics suppli
 ## Development
 
 Open `index.html` locally or serve the repository with any static server.
+
+
+## Deployment status
+
+GitHub Pages deployment enabled.
